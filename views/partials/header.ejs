@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= typeof pageTitle !== 'undefined' ? pageTitle + ' | ' + siteName : siteName %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark">&#127859;</span>
+        <span class="brand-name"><%= siteName %></span>
+      </a>
+
+      <nav class="site-nav">
+        <a href="/">Recipes</a>
+        <div class="unit-toggle" id="global-unit-toggle" role="group" aria-label="Unit system">
+          <button type="button" class="unit-toggle__option is-active" data-unit="metric">Metric</button>
+          <button type="button" class="unit-toggle__option" data-unit="imperial">Imperial</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main>

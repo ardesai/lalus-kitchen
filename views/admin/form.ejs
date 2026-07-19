@@ -1,0 +1,66 @@
+<%- include('../partials/header', { pageTitle: mode === 'new' ? 'New Recipe' : 'Edit Recipe' }) %>
+
+<section class="container admin-form-page">
+  <h1><%= mode === 'new' ? 'Add a New Recipe' : 'Edit Recipe' %></h1>
+
+  <% if (errors && errors.length) { %>
+    <ul class="form-error-list">
+      <% errors.forEach(function(err) { %>
+        <li><%= err %></li>
+      <% }); %>
+    </ul>
+  <% } %>
+
+  <form
+    method="POST"
+    action="<%= mode === 'new' ? '/admin/recipes' : '/admin/recipes/' + recipe.slug %>"
+    enctype="multipart/form-data"
+    class="stacked-form recipe-form"
+  >
+    <label>
+      Title
+      <input type="text" name="title" value="<%= values.title %>" required />
+    </label>
+
+    <label>
+      Description
+      <textarea name="description" rows="3" required><%= values.description %></textarea>
+    </label>
+
+    <label>
+      Hero Photo <% if (mode === 'new') { %><span class="required-mark">(required)</span><% } %>
+      <input type="file" name="image" accept="image/png,image/jpeg,image/webp,image/gif" <%= mode === 'new' ? 'required' : '' %> />
+    </label>
+    <% if (mode === 'edit' && recipe.image_path) { %>
+      <img class="current-image-preview" src="<%= recipe.image_path %>" alt="Current hero photo" />
+      <p class="field-hint">Uploading a new photo will replace the current one.</p>
+    <% } %>
+
+    <label>
+      Ingredients
+      <textarea name="ingredients" rows="8" required placeholder="250g flour&#10;2 tsp vanilla extract&#10;3 eggs&#10;Salt to taste"><%= values.ingredientsText %></textarea>
+      <span class="field-hint">One ingredient per line, metric amounts (e.g. "250g flour", "200ml milk", "2 tsp vanilla"). Lines without a gram/kg/ml/l amount won't be converted to Imperial automatically.</span>
+    </label>
+
+    <label>
+      Cooking Steps
+      <textarea name="steps" rows="8" required placeholder="Preheat the oven to 180°C.&#10;Mix flour and sugar in a bowl.&#10;Bake for 25 minutes."><%= values.stepsText %></textarea>
+      <span class="field-hint">One step per line. Write oven temperatures as e.g. "180°C" so they convert to Fahrenheit automatically.</span>
+    </label>
+
+    <label>
+      Tips &amp; Tricks
+      <textarea name="tips" rows="5" placeholder="Swap butter for ghee for a nuttier flavor.&#10;Let the batter rest for 10 minutes before baking."><%= values.tipsText %></textarea>
+      <span class="field-hint">One tip per line. Optional.</span>
+    </label>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary"><%= mode === 'new' ? 'Publish Recipe' : 'Save Changes' %></button>
+      <a class="btn btn-ghost" href="/admin">Cancel</a>
+    </div>
+  </form>
+</section>
+
+<script src="/js/admin.js"></script>
+
+<%- include('../partials/footer') %>

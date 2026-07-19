@@ -1,0 +1,23 @@
+<%- include('../partials/header', { pageTitle: 'Admin Login' }) %>
+
+<section class="container admin-auth">
+  <div class="admin-auth__card">
+    <h1>Admin Login</h1>
+    <% if (error) { %>
+      <p class="form-error"><%= error %></p>
+    <% } %>
+    <form method="POST" action="/admin/login" class="stacked-form">
+      <label>
+        Username
+        <input type="text" name="username" autocomplete="username" required />
+      </label>
+      <label>
+        Password
+        <input type="password" name="password" autocomplete="current-password" required />
+      </label>
+      <button type="submit" class="btn btn-primary">Log in</button>
+    </form>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

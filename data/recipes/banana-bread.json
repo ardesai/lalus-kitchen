@@ -1,0 +1,63 @@
+{
+  "slug": "banana-bread",
+  "title": "Banana Bread",
+  "description": "Moist, spiced banana bread that turns overripe bananas into the best loaf in the kitchen.",
+  "image_path": "/uploads/seed-banana-bread.svg",
+  "ingredients": [
+    {
+      "amount": 3,
+      "unit": null,
+      "name": "ripe bananas, mashed"
+    },
+    {
+      "amount": 150,
+      "unit": "g",
+      "name": "sugar"
+    },
+    {
+      "amount": 115,
+      "unit": "g",
+      "name": "butter, melted"
+    },
+    {
+      "amount": 2,
+      "unit": null,
+      "name": "eggs"
+    },
+    {
+      "amount": 190,
+      "unit": "g",
+      "name": "flour"
+    },
+    {
+      "amount": 1,
+      "unit": "tsp",
+      "name": "baking soda"
+    },
+    {
+      "amount": 1,
+      "unit": "pinch",
+      "name": "salt"
+    },
+    {
+      "amount": 1,
+      "unit": "tsp",
+      "name": "vanilla extract"
+    }
+  ],
+  "steps": [
+    "Preheat the oven to 175°C and grease a loaf pan.",
+    "Mix mashed bananas with melted butter.",
+    "Stir in sugar, egg, and vanilla extract.",
+    "Sprinkle the baking soda and salt over the mixture and stir in.",
+    "Fold in the flour until just combined, then pour into the loaf pan.",
+    "Bake at 175°C for 55-60 minutes, until a toothpick comes out clean."
+  ],
+  "tips": [
+    "The riper (spottier) the bananas, the sweeter the loaf.",
+    "Add walnuts or chocolate chips for extra texture.",
+    "Let it cool fully before slicing to avoid crumbling."
+  ],
+  "created_at": "2026-07-19T19:00:46.112Z",
+  "updated_at": "2026-07-19T19:00:46.112Z"
+}

@@ -1,0 +1,45 @@
+<%- include('../partials/header', { pageTitle: 'Admin Dashboard' }) %>
+
+<section class="container admin-dashboard">
+  <div class="admin-dashboard__header">
+    <h1>Manage Recipes</h1>
+    <div class="admin-dashboard__actions">
+      <a class="btn btn-primary" href="/admin/recipes/new">+ New Recipe</a>
+      <form method="POST" action="/admin/logout">
+        <button type="submit" class="btn btn-ghost">Log out</button>
+      </form>
+    </div>
+  </div>
+
+  <% if (recipes.length === 0) { %>
+    <p>No recipes yet. Add your first one!</p>
+  <% } else { %>
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Title</th>
+          <th>Created</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% recipes.forEach(function(recipe) { %>
+          <tr>
+            <td><img class="admin-table__thumb" src="<%= recipe.image_path %>" alt="" /></td>
+            <td><a href="/recipes/<%= recipe.slug %>"><%= recipe.title %></a></td>
+            <td><%= recipe.created_at.slice(0, 10) %></td>
+            <td class="admin-table__actions">
+              <a class="btn btn-small" href="/admin/recipes/<%= recipe.slug %>/edit">Edit</a>
+              <form method="POST" action="/admin/recipes/<%= recipe.slug %>/delete" onsubmit="return confirm('Delete this recipe? This cannot be undone.');">
+                <button type="submit" class="btn btn-small btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</section>
+
+<%- include('../partials/footer') %>

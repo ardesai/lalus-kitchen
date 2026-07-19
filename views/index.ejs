@@ -1,0 +1,30 @@
+<%- include('partials/header', { pageTitle: 'Home' }) %>
+
+<section class="hero-banner">
+  <div class="container">
+    <h1>Recipes worth wiping your hands before you scroll.</h1>
+    <p>Home-tested dishes from Lalu's Kitchen, written the way we actually cook them.</p>
+  </div>
+</section>
+
+<section class="container recipe-grid-section">
+  <% if (recipes.length === 0) { %>
+    <div class="empty-state">
+      <p>No recipes yet. Check back soon!</p>
+    </div>
+  <% } else { %>
+    <div class="recipe-grid">
+      <% recipes.forEach(function(recipe) { %>
+        <a class="recipe-card" href="/recipes/<%= recipe.slug %>">
+          <div class="recipe-card__image" style="background-image: url('<%= recipe.image_path %>')"></div>
+          <div class="recipe-card__body">
+            <h2><%= recipe.title %></h2>
+            <p><%= recipe.description %></p>
+          </div>
+        </a>
+      <% }); %>
+    </div>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

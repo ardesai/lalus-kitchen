@@ -1,0 +1,59 @@
+<%- include('partials/header', { pageTitle: recipe.title }) %>
+
+<article class="recipe-page">
+  <div class="recipe-hero">
+    <img src="<%= recipe.image_path %>" alt="<%= recipe.title %>" class="recipe-hero__image" />
+    <div class="recipe-hero__overlay">
+      <div class="container">
+        <h1><%= recipe.title %></h1>
+        <p class="recipe-hero__description"><%= recipe.description %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container recipe-body">
+    <div class="unit-toggle unit-toggle--recipe" id="recipe-unit-toggle" role="group" aria-label="Unit system">
+      <button type="button" class="unit-toggle__option is-active" data-unit="metric">Metric</button>
+      <button type="button" class="unit-toggle__option" data-unit="imperial">Imperial</button>
+    </div>
+
+    <section class="recipe-section" aria-labelledby="ingredients-heading">
+      <h2 id="ingredients-heading">Ingredients</h2>
+      <ul class="ingredient-list">
+        <% ingredientsView.forEach(function(ing, i) { %>
+          <li class="ingredient">
+            <label>
+              <input type="checkbox" />
+              <span class="ingredient-text">
+                <% if (ing.convertible) { %><span class="js-amount" data-amount="<%= ing.amount %>" data-unit="<%= ing.unit %>"><%= ing.displayAmount %> <%= ing.unit %></span><% } else if (ing.amount !== null) { %><span class="ingredient-amount-static"><%= ing.displayAmount %><%= ing.unit ? ' ' + ing.unit : '' %></span><% } %>
+                <%= ing.name %>
+              </span>
+            </label>
+          </li>
+        <% }); %>
+      </ul>
+    </section>
+
+    <section class="recipe-section" aria-labelledby="steps-heading">
+      <h2 id="steps-heading">Cooking Steps</h2>
+      <ol class="step-list">
+        <% stepsHtml.forEach(function(stepHtml) { %>
+          <li><%- stepHtml %></li>
+        <% }); %>
+      </ol>
+    </section>
+
+    <% if (recipe.tips && recipe.tips.length) { %>
+      <section class="recipe-section tips-section" aria-labelledby="tips-heading">
+        <h2 id="tips-heading">Tips &amp; Tricks</h2>
+        <ul class="tips-list">
+          <% recipe.tips.forEach(function(tip) { %>
+            <li><%= tip %></li>
+          <% }); %>
+        </ul>
+      </section>
+    <% } %>
+  </div>
+</article>
+
+<%- include('partials/footer') %>
