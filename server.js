@@ -9,9 +9,11 @@ const adminRoutes = require('./routes/admin');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || '127.0.0.1';
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+app.set('trust proxy', 1); // running behind Caddy/nginx in production
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -36,6 +38,6 @@ app.use((req, res) => {
   res.status(404).render('404', { siteName: "Lalu's Kitchen" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Lalu's Kitchen running at http://localhost:${PORT}`);
+app.listen(PORT, HOST, () => {
+  console.log(`Lalu's Kitchen running at http://${HOST}:${PORT}`);
 });
