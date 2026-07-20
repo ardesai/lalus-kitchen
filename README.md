@@ -131,7 +131,13 @@ seeded.
 
 ## Using the admin panel
 
-1. Go to `http://localhost:3000/admin` — you'll be redirected to
+The admin panel isn't linked from anywhere on the public site (no nav or
+footer link) — bookmark the URL directly:
+
+- Local: `http://localhost:3000/admin`
+- Production: `https://kitchen.lalus.world/admin`
+
+1. Go to the admin URL above — you'll be redirected to
    `/admin/login` if not signed in.
 2. Log in with the `ADMIN_USERNAME` / password you set in `.env`.
 3. From the dashboard you can add a new recipe, edit an existing one, or
@@ -174,3 +180,6 @@ When adding or editing a recipe:
   somewhere long-running.
 - Set a strong, unique `SESSION_SECRET` and `ADMIN_PASSWORD_HASH` before
   exposing the app beyond your own machine, and serve it over HTTPS.
+- The admin panel has no public link to it (see above) to reduce casual
+  discovery, but `/admin/login` still requires the correct credentials
+  regardless — don't rely on the missing link as your only protection.

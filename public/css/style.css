@@ -474,8 +474,6 @@ img { max-width: 100%; display: block; }
   flex-wrap: wrap;
   gap: 10px;
 }
-.footer-admin-link { color: var(--color-text-muted); }
-
 .not-found { text-align: center; padding: 90px 0; }
 .not-found h1 { font-size: 4rem; color: var(--color-primary); }
 
