@@ -70,14 +70,47 @@ img { max-width: 100%; display: block; }
 .brand {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-family: var(--font-heading);
-  font-size: 1.4rem;
-  font-weight: 700;
+  gap: 12px;
   color: var(--color-text);
 }
-.brand:hover { text-decoration: none; color: var(--color-primary-dark); }
-.brand-mark { font-size: 1.6rem; }
+.brand:hover { text-decoration: none; }
+
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  background: linear-gradient(135deg, #f4a960, var(--color-primary) 55%, var(--color-primary-dark));
+  box-shadow: 0 4px 10px rgba(183, 78, 31, 0.35), inset 0 0 0 2px rgba(255, 255, 255, 0.55);
+  transform: rotate(-8deg);
+  transition: transform 0.25s ease;
+}
+.brand:hover .brand-badge { transform: rotate(0deg) scale(1.06); }
+
+.brand-name {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+.brand-name__first {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--color-primary-dark);
+}
+.brand-name__caps {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-top: 3px;
+}
 
 .site-nav {
   display: flex;
