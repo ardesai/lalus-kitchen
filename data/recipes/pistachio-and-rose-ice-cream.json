@@ -1,0 +1,78 @@
+{
+  "slug": "pistachio-and-rose-ice-cream",
+  "title": "Pistachio and Rose Ice-cream",
+  "description": "Indian kulfi style Pistachio and Rose Ice-cream",
+  "image_path": "/uploads/1784543706738-99e3f90cd578fedf.jpg",
+  "ingredients": [
+    {
+      "amount": 300,
+      "unit": "ml",
+      "name": "heavy cream"
+    },
+    {
+      "amount": 50,
+      "unit": "g",
+      "name": "sugar"
+    },
+    {
+      "amount": 75,
+      "unit": "g",
+      "name": "shelled pistachios"
+    },
+    {
+      "amount": 50,
+      "unit": "g",
+      "name": "cashews"
+    },
+    {
+      "amount": 50,
+      "unit": "ml",
+      "name": "milk"
+    },
+    {
+      "amount": 5,
+      "unit": "g",
+      "name": "rose petals"
+    },
+    {
+      "amount": 1,
+      "unit": "tsp",
+      "name": "rose water"
+    },
+    {
+      "amount": 1,
+      "unit": "tbsp",
+      "name": "protein powder (optional)"
+    },
+    {
+      "amount": 1,
+      "unit": "tbsp",
+      "name": "milk powder (optional)"
+    },
+    {
+      "amount": 1,
+      "unit": "tsp",
+      "name": "ground cardamom"
+    },
+    {
+      "amount": null,
+      "unit": null,
+      "name": "some chopped pistachio and rose petals to garnish"
+    }
+  ],
+  "steps": [
+    "Soak all the nuts and rose petals in the milk",
+    "In the meantime, whip the cream until light peak forms",
+    "Once the nuts are softer, make a fine paste",
+    "Add the paste, rose water, cardamom, protein powder and milk powder and mix them well",
+    "Transfer it into a container and top it up with some chopped pistachio and more rose petals.",
+    "Freeze it for at least 6 hours"
+  ],
+  "tips": [
+    "Cashews are to add more creaminess and nutty flavour and also cheaper than pistachios",
+    "Protein powder - make sure if you do use it it is either vanilla or unflavoured",
+    "Milk powder - is optional but it makes it form firm and creamy"
+  ],
+  "created_at": "2026-07-20T10:35:07.343Z",
+  "updated_at": "2026-07-20T10:35:07.343Z"
+}
