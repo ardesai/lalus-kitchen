@@ -2,7 +2,7 @@
 
 <article class="recipe-page">
   <div class="recipe-hero">
-    <div class="recipe-hero__image" style="background-image: url('<%= recipe.image_path %>'); background-size: cover; background-position: center;" role="img" aria-label="<%= recipe.title %>"></div>
+    <img src="<%= recipe.image_path %>" alt="<%= recipe.title %>" class="recipe-hero__image" />
     <div class="recipe-hero__overlay">
       <div class="container">
         <h1><%= recipe.title %></h1>
