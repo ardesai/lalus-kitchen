@@ -304,6 +304,89 @@ img { max-width: 100%; display: block; }
 
 .recipe-body { padding: 32px 20px 72px; }
 
+.cook-mode-trigger { text-align: center; margin: 4px 0 28px; }
+
+/* ---------- Cook mode ---------- */
+.cook-mode {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg);
+  z-index: 100;
+  display: none;
+  flex-direction: column;
+}
+.cook-mode.is-open { display: flex; }
+
+.cook-mode__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+.cook-mode__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.cook-mode__close {
+  border: none;
+  background: transparent;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  padding: 4px 10px;
+}
+.cook-mode__close:hover { color: var(--color-text); }
+
+.cook-mode__progress {
+  height: 4px;
+  background: var(--color-border);
+  flex-shrink: 0;
+}
+.cook-mode__progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--color-primary);
+  transition: width 0.25s ease;
+}
+
+.cook-mode__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  text-align: center;
+  overflow-y: auto;
+}
+.cook-mode__step-count {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 18px;
+}
+.cook-mode__step-text {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  font-weight: 500;
+  line-height: 1.45;
+  max-width: 720px;
+}
+
+.cook-mode__nav {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  border-top: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+.cook-mode__nav .btn { flex: 1; text-align: center; }
+
 .recipe-section {
   background: var(--color-surface);
   border-radius: var(--radius-lg);
@@ -412,6 +495,8 @@ img { max-width: 100%; display: block; }
 .btn-danger { background: var(--color-danger); color: #fff; }
 .btn-danger:hover { background: var(--color-danger-dark); }
 .btn-small { padding: 7px 14px; font-size: 0.85rem; }
+.btn-large { padding: 15px 30px; font-size: 1.05rem; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
 /* ---------- Forms ---------- */
 .stacked-form {

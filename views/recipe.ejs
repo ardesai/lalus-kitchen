@@ -56,6 +56,10 @@
       <button type="button" class="unit-toggle__option" data-unit="imperial">Imperial</button>
     </div>
 
+    <div class="cook-mode-trigger">
+      <button type="button" class="btn btn-primary btn-large" id="start-cook-mode">👨‍🍳 Start Cooking</button>
+    </div>
+
     <section class="recipe-section" aria-labelledby="ingredients-heading">
       <h2 id="ingredients-heading">Ingredients</h2>
       <ul class="ingredient-list">
@@ -93,6 +97,26 @@
       </section>
     <% } %>
   </div>
+
+  <div class="cook-mode" id="cook-mode" role="dialog" aria-modal="true" aria-label="Cook mode: <%= recipe.title %>">
+    <div class="cook-mode__header">
+      <span class="cook-mode__title"><%= recipe.title %></span>
+      <button type="button" class="cook-mode__close" id="cook-mode-close" aria-label="Exit cook mode">&times;</button>
+    </div>
+    <div class="cook-mode__progress">
+      <div class="cook-mode__progress-bar" id="cook-mode-progress-bar"></div>
+    </div>
+    <div class="cook-mode__body">
+      <span class="cook-mode__step-count" id="cook-mode-step-count"></span>
+      <div class="cook-mode__step-text" id="cook-mode-step-text" aria-live="polite"></div>
+    </div>
+    <div class="cook-mode__nav">
+      <button type="button" class="btn btn-ghost" id="cook-mode-prev">&larr; Back</button>
+      <button type="button" class="btn btn-primary" id="cook-mode-next">Next &rarr;</button>
+    </div>
+  </div>
 </article>
+
+<script src="/js/cook-mode.js"></script>
 
 <%- include('partials/footer') %>
