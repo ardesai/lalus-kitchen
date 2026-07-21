@@ -3,6 +3,10 @@
   "title": "Pistachio and Rose Ice-cream",
   "description": "Indian kulfi style Pistachio and Rose Ice-cream",
   "image_path": "/uploads/1784543706738-99e3f90cd578fedf.jpg",
+  "prep_minutes": 30,
+  "cook_minutes": 360,
+  "servings": 4,
+  "difficulty": "Easy",
   "ingredients": [
     {
       "amount": 300,

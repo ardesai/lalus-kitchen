@@ -48,7 +48,6 @@ lalus-kitchen/
 │   ├── js/admin.js          # Image preview on the admin form
 │   └── uploads/             # Uploaded recipe photos
 └── data/
-    ├── seed.js              # Optional sample recipes
     └── recipes/             # One JSON file per recipe, created automatically
 ```
 
@@ -116,18 +115,6 @@ set). The `data/recipes/` folder is created automatically on first run — no
 separate database setup needed. Each recipe is saved as its own
 `<slug>.json` file there, so you can inspect, back up, or hand-edit recipes
 directly if you ever want to.
-
-### Loading sample recipes (optional)
-
-To populate the site with two example recipes so it isn't empty on first
-look:
-
-```bash
-npm run seed
-```
-
-This is safe to re-run — it skips any recipe whose title it has already
-seeded.
 
 ## Using the admin panel
 
