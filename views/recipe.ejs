@@ -1,6 +1,10 @@
 <%- include('partials/header', { pageTitle: recipe.title }) %>
 
 <article class="recipe-page">
+  <div class="container recipe-breadcrumb">
+    <a href="/" class="recipe-breadcrumb__link">&larr; All recipes</a>
+  </div>
+
   <div class="recipe-hero">
     <div class="recipe-hero__image" style="background-image: url('<%= recipe.image_path %>'); background-size: cover; background-position: center;" role="img" aria-label="<%= recipe.title %>"></div>
     <div class="recipe-hero__overlay">
@@ -12,6 +16,41 @@
   </div>
 
   <div class="container recipe-body">
+    <% if (meta.prep || meta.cook || meta.total || meta.servings || meta.difficulty) { %>
+      <div class="recipe-meta-bar">
+        <% if (meta.prep) { %>
+          <div class="recipe-meta-bar__item">
+            <span class="recipe-meta-bar__label">Prep</span>
+            <span class="recipe-meta-bar__value"><%= meta.prep %></span>
+          </div>
+        <% } %>
+        <% if (meta.cook) { %>
+          <div class="recipe-meta-bar__item">
+            <span class="recipe-meta-bar__label">Cook</span>
+            <span class="recipe-meta-bar__value"><%= meta.cook %></span>
+          </div>
+        <% } %>
+        <% if (meta.total) { %>
+          <div class="recipe-meta-bar__item">
+            <span class="recipe-meta-bar__label">Total</span>
+            <span class="recipe-meta-bar__value"><%= meta.total %></span>
+          </div>
+        <% } %>
+        <% if (meta.servings) { %>
+          <div class="recipe-meta-bar__item">
+            <span class="recipe-meta-bar__label">Servings</span>
+            <span class="recipe-meta-bar__value"><%= meta.servings %></span>
+          </div>
+        <% } %>
+        <% if (meta.difficulty) { %>
+          <div class="recipe-meta-bar__item">
+            <span class="recipe-meta-bar__label">Difficulty</span>
+            <span class="recipe-meta-bar__value"><%= meta.difficulty %></span>
+          </div>
+        <% } %>
+      </div>
+    <% } %>
+
     <div class="unit-toggle unit-toggle--recipe" id="recipe-unit-toggle" role="group" aria-label="Unit system">
       <button type="button" class="unit-toggle__option is-active" data-unit="metric">Metric</button>
       <button type="button" class="unit-toggle__option" data-unit="imperial">Imperial</button>

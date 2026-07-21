@@ -29,7 +29,23 @@ function formValuesFromBody(body) {
     ingredientsText: body.ingredients || '',
     stepsText: body.steps || '',
     tipsText: body.tips || '',
+    prepMinutes: body.prepMinutes || '',
+    cookMinutes: body.cookMinutes || '',
+    servings: body.servings || '',
+    difficulty: body.difficulty || '',
   };
+}
+
+const ALLOWED_DIFFICULTIES = new Set(['Easy', 'Medium', 'Hard']);
+
+function parseOptionalInt(value) {
+  if (value === undefined || value === null || String(value).trim() === '') return null;
+  const n = parseInt(value, 10);
+  return Number.isFinite(n) && n >= 0 ? n : null;
+}
+
+function parseDifficulty(value) {
+  return ALLOWED_DIFFICULTIES.has(value) ? value : null;
 }
 
 // --- Auth ---
@@ -77,7 +93,10 @@ router.get('/recipes/new', requireAuth, (req, res) => {
     siteName: "Lalu's Kitchen",
     mode: 'new',
     recipe: null,
-    values: { title: '', description: '', ingredientsText: '', stepsText: '', tipsText: '' },
+    values: {
+      title: '', description: '', ingredientsText: '', stepsText: '', tipsText: '',
+      prepMinutes: '', cookMinutes: '', servings: '', difficulty: '',
+    },
     errors: [],
   });
 });
@@ -112,6 +131,10 @@ router.post('/recipes', requireAuth, handleUpload, (req, res) => {
     ingredients: parseIngredientsText(req.body.ingredients),
     steps: parseLinesText(req.body.steps),
     tips: parseLinesText(req.body.tips),
+    prepMinutes: parseOptionalInt(req.body.prepMinutes),
+    cookMinutes: parseOptionalInt(req.body.cookMinutes),
+    servings: parseOptionalInt(req.body.servings),
+    difficulty: parseDifficulty(req.body.difficulty),
   });
 
   res.redirect(`/recipes/${recipe.slug}`);
@@ -131,6 +154,10 @@ router.get('/recipes/:slug/edit', requireAuth, (req, res) => {
       .join('\n'),
     stepsText: recipe.steps.join('\n'),
     tipsText: recipe.tips.join('\n'),
+    prepMinutes: recipe.prep_minutes != null ? String(recipe.prep_minutes) : '',
+    cookMinutes: recipe.cook_minutes != null ? String(recipe.cook_minutes) : '',
+    servings: recipe.servings != null ? String(recipe.servings) : '',
+    difficulty: recipe.difficulty || '',
   };
 
   res.render('admin/form', {
@@ -177,6 +204,10 @@ router.post('/recipes/:slug', requireAuth, handleUpload, (req, res) => {
     ingredients: parseIngredientsText(req.body.ingredients),
     steps: parseLinesText(req.body.steps),
     tips: parseLinesText(req.body.tips),
+    prepMinutes: parseOptionalInt(req.body.prepMinutes),
+    cookMinutes: parseOptionalInt(req.body.cookMinutes),
+    servings: parseOptionalInt(req.body.servings),
+    difficulty: parseDifficulty(req.body.difficulty),
   });
 
   if (req.file && oldImagePath) {

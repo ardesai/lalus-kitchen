@@ -43,7 +43,7 @@ const Recipe = {
     return readRecipeFile(slug);
   },
 
-  create({ title, description, imagePath, ingredients, steps, tips }) {
+  create({ title, description, imagePath, ingredients, steps, tips, prepMinutes, cookMinutes, servings, difficulty }) {
     const slug = uniqueSlug(slugify(title));
     const now = new Date().toISOString();
 
@@ -52,6 +52,10 @@ const Recipe = {
       title,
       description,
       image_path: imagePath,
+      prep_minutes: prepMinutes || null,
+      cook_minutes: cookMinutes || null,
+      servings: servings || null,
+      difficulty: difficulty || null,
       ingredients,
       steps,
       tips,
@@ -63,7 +67,7 @@ const Recipe = {
     return recipe;
   },
 
-  update(slug, { title, description, imagePath, ingredients, steps, tips }) {
+  update(slug, { title, description, imagePath, ingredients, steps, tips, prepMinutes, cookMinutes, servings, difficulty }) {
     const existing = readRecipeFile(slug);
     if (!existing) return null;
 
@@ -76,6 +80,10 @@ const Recipe = {
       title,
       description,
       image_path: imagePath || existing.image_path,
+      prep_minutes: prepMinutes || null,
+      cook_minutes: cookMinutes || null,
+      servings: servings || null,
+      difficulty: difficulty || null,
       ingredients,
       steps,
       tips,

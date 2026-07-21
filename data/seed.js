@@ -10,6 +10,10 @@ const seedRecipes = [
     title: 'Butter Chicken',
     description: 'Rich, tomato-based curry with tender chicken thighs, simmered in butter and cream.',
     imagePath: '/uploads/seed-butter-chicken.svg',
+    prepMinutes: 40,
+    cookMinutes: 30,
+    servings: 4,
+    difficulty: 'Medium',
     ingredientsText: [
       '500g chicken thighs, diced',
       '2 tbsp butter',
@@ -38,6 +42,10 @@ const seedRecipes = [
     title: 'Banana Bread',
     description: 'Moist, spiced banana bread that turns overripe bananas into the best loaf in the kitchen.',
     imagePath: '/uploads/seed-banana-bread.svg',
+    prepMinutes: 15,
+    cookMinutes: 60,
+    servings: 8,
+    difficulty: 'Easy',
     ingredientsText: [
       '3 ripe bananas, mashed',
       '150g sugar',
@@ -78,6 +86,10 @@ for (const seed of seedRecipes) {
     ingredients: parseIngredientsText(seed.ingredientsText),
     steps: parseLinesText(seed.stepsText),
     tips: parseLinesText(seed.tipsText),
+    prepMinutes: seed.prepMinutes,
+    cookMinutes: seed.cookMinutes,
+    servings: seed.servings,
+    difficulty: seed.difficulty,
   });
   console.log(`Seeded "${seed.title}".`);
 }

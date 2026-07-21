@@ -19,6 +19,12 @@
           <div class="recipe-card__image" style="background-image: url('<%= recipe.image_path %>')"></div>
           <div class="recipe-card__body">
             <h2><%= recipe.title %></h2>
+            <% if (recipe.meta.total || recipe.meta.difficulty) { %>
+              <div class="recipe-card__meta">
+                <% if (recipe.meta.total) { %><span class="meta-pill">⏱ <%= recipe.meta.total %></span><% } %>
+                <% if (recipe.meta.difficulty) { %><span class="meta-pill">🍳 <%= recipe.meta.difficulty %></span><% } %>
+              </div>
+            <% } %>
             <p><%= recipe.description %></p>
           </div>
         </a>

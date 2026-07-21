@@ -99,6 +99,32 @@ function markupTemperatures(escapedText) {
   );
 }
 
+// Formats a minute count as e.g. "25 min", "1 hr", or "1 hr 30 min".
+// Returns null when there's nothing meaningful to show.
+function formatDuration(minutes) {
+  const m = Number(minutes);
+  if (!Number.isFinite(m) || m <= 0) return null;
+  const hrs = Math.floor(m / 60);
+  const mins = m % 60;
+  if (hrs === 0) return `${mins} min`;
+  if (mins === 0) return `${hrs} hr`;
+  return `${hrs} hr ${mins} min`;
+}
+
+// Derives the display-ready prep/cook/total/servings/difficulty for a recipe.
+// Fields are all optional, so each may come back null.
+function recipeMeta(recipe) {
+  const prepMinutes = Number(recipe.prep_minutes) || 0;
+  const cookMinutes = Number(recipe.cook_minutes) || 0;
+  return {
+    prep: formatDuration(recipe.prep_minutes),
+    cook: formatDuration(recipe.cook_minutes),
+    total: formatDuration(prepMinutes + cookMinutes),
+    servings: recipe.servings || null,
+    difficulty: recipe.difficulty || null,
+  };
+}
+
 module.exports = {
   slugify,
   parseIngredientLine,
@@ -108,4 +134,6 @@ module.exports = {
   formatAmount,
   escapeHtml,
   markupTemperatures,
+  formatDuration,
+  recipeMeta,
 };

@@ -1,11 +1,11 @@
 const express = require('express');
 const Recipe = require('../models/recipe');
-const { escapeHtml, markupTemperatures, isConvertibleUnit, formatAmount } = require('../utils/recipe');
+const { escapeHtml, markupTemperatures, isConvertibleUnit, formatAmount, recipeMeta } = require('../utils/recipe');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  const recipes = Recipe.all();
+  const recipes = Recipe.all().map((recipe) => ({ ...recipe, meta: recipeMeta(recipe) }));
   res.render('index', { recipes, siteName: "Lalu's Kitchen" });
 });
 
@@ -23,7 +23,7 @@ router.get('/recipes/:slug', (req, res) => {
     displayAmount: formatAmount(ing.amount),
   }));
 
-  res.render('recipe', { recipe, stepsHtml, ingredientsView, siteName: "Lalu's Kitchen" });
+  res.render('recipe', { recipe, meta: recipeMeta(recipe), stepsHtml, ingredientsView, siteName: "Lalu's Kitchen" });
 });
 
 module.exports = router;

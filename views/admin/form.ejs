@@ -27,6 +27,30 @@
       <textarea name="description" rows="3" required><%= values.description %></textarea>
     </label>
 
+    <div class="form-row">
+      <label>
+        Prep Time (minutes)
+        <input type="number" name="prepMinutes" min="0" value="<%= values.prepMinutes %>" />
+      </label>
+      <label>
+        Cook Time (minutes)
+        <input type="number" name="cookMinutes" min="0" value="<%= values.cookMinutes %>" />
+      </label>
+      <label>
+        Servings
+        <input type="number" name="servings" min="1" value="<%= values.servings %>" />
+      </label>
+      <label>
+        Difficulty
+        <select name="difficulty">
+          <option value="" <%= values.difficulty === '' ? 'selected' : '' %>>Not specified</option>
+          <option value="Easy" <%= values.difficulty === 'Easy' ? 'selected' : '' %>>Easy</option>
+          <option value="Medium" <%= values.difficulty === 'Medium' ? 'selected' : '' %>>Medium</option>
+          <option value="Hard" <%= values.difficulty === 'Hard' ? 'selected' : '' %>>Hard</option>
+        </select>
+      </label>
+    </div>
+
     <label>
       Hero Photo <% if (mode === 'new') { %><span class="required-mark">(required)</span><% } %>
       <input type="file" name="image" accept="image/png,image/jpeg,image/webp,image/gif" <%= mode === 'new' ? 'required' : '' %> />
