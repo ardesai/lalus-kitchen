@@ -8,7 +8,8 @@
   --color-primary-dark: #b74e1f;
   --color-accent: #2f6b4f;
   --color-border: #eee1d3;
-  --color-danger: #c0392b;
+  --color-danger: #dc3545;
+  --color-danger-dark: #b02a37;
   --radius-md: 12px;
   --radius-lg: 20px;
   --shadow-card: 0 6px 20px rgba(43, 35, 32, 0.08);
@@ -409,6 +410,7 @@ img { max-width: 100%; display: block; }
 .btn-ghost { background: transparent; border: 1px solid var(--color-border); color: var(--color-text); }
 .btn-ghost:hover { background: var(--color-bg); }
 .btn-danger { background: var(--color-danger); color: #fff; }
+.btn-danger:hover { background: var(--color-danger-dark); }
 .btn-small { padding: 7px 14px; font-size: 0.85rem; }
 
 /* ---------- Forms ---------- */
