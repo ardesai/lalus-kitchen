@@ -13,9 +13,42 @@
       <p>No recipes yet. Check back soon!</p>
     </div>
   <% } else { %>
-    <div class="recipe-grid">
+    <div class="search-filter-panel">
+      <div class="search-bar-container">
+        <svg class="search-icon-svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="recipe-search" class="search-input" placeholder="Search recipes by name, description, or ingredients..." />
+      </div>
+      <div class="filters-group">
+        <span class="filter-label">Difficulty:</span>
+        <div class="filter-tags" id="difficulty-filters">
+          <button type="button" class="filter-tag is-active" data-value="all">All</button>
+          <button type="button" class="filter-tag" data-value="Easy">Easy</button>
+          <button type="button" class="filter-tag" data-value="Medium">Medium</button>
+          <button type="button" class="filter-tag" data-value="Hard">Hard</button>
+        </div>
+        
+        <span class="filter-label">Time:</span>
+        <div class="filter-tags" id="time-filters">
+          <button type="button" class="filter-tag is-active" data-value="all">All</button>
+          <button type="button" class="filter-tag" data-value="quick">Quick (&lt; 30m)</button>
+          <button type="button" class="filter-tag" data-value="medium">Medium (&lt; 1h)</button>
+          <button type="button" class="filter-tag" data-value="slow">Slow (1h+)</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="recipe-grid" id="recipe-grid">
       <% recipes.forEach(function(recipe) { %>
-        <a class="recipe-card" href="/recipes/<%= recipe.slug %>">
+        <% 
+          var totalMinutes = (Number(recipe.prep_minutes) || 0) + (Number(recipe.cook_minutes) || 0);
+          var ingredientNames = (recipe.ingredients || []).map(function(i) { return i.name.toLowerCase(); }).join(' ');
+        %>
+        <a class="recipe-card" href="/recipes/<%= recipe.slug %>"
+           data-title="<%= recipe.title.toLowerCase() %>"
+           data-description="<%= recipe.description.toLowerCase() %>"
+           data-difficulty="<%= recipe.difficulty || '' %>"
+           data-ingredients="<%= ingredientNames %>"
+           data-minutes="<%= totalMinutes %>">
           <div class="recipe-card__image" style="background-image: url('<%= recipe.image_path %>')"></div>
           <div class="recipe-card__body">
             <h2><%= recipe.title %></h2>
@@ -33,4 +66,5 @@
   <% } %>
 </section>
 
+<script src="/js/recipe-helpers.js"></script>
 <%- include('partials/footer') %>

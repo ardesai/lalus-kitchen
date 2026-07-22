@@ -39,7 +39,13 @@
         <% if (meta.servings) { %>
           <div class="recipe-meta-bar__item">
             <span class="recipe-meta-bar__label">Servings</span>
-            <span class="recipe-meta-bar__value"><%= meta.servings %></span>
+            <span class="recipe-meta-bar__value" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+              <span id="servings-value" data-base-servings="<%= recipe.servings %>"><%= recipe.servings %></span>
+              <span class="servings-scaler">
+                <button type="button" class="servings-scaler__btn" id="servings-decrease" aria-label="Decrease servings">&minus;</button>
+                <button type="button" class="servings-scaler__btn" id="servings-increase" aria-label="Increase servings">&plus;</button>
+              </span>
+            </span>
           </div>
         <% } %>
         <% if (meta.difficulty) { %>
@@ -101,15 +107,40 @@
   <div class="cook-mode" id="cook-mode" role="dialog" aria-modal="true" aria-label="Cook mode: <%= recipe.title %>">
     <div class="cook-mode__header">
       <span class="cook-mode__title"><%= recipe.title %></span>
+      <button type="button" class="btn btn-ghost btn-small cook-mode__ingredients-toggle" id="cook-mode-ing-toggle">📋 Ingredients</button>
       <button type="button" class="cook-mode__close" id="cook-mode-close" aria-label="Exit cook mode">&times;</button>
     </div>
+    
     <div class="cook-mode__progress">
       <div class="cook-mode__progress-bar" id="cook-mode-progress-bar"></div>
     </div>
-    <div class="cook-mode__body">
-      <span class="cook-mode__step-count" id="cook-mode-step-count"></span>
-      <div class="cook-mode__step-text" id="cook-mode-step-text" aria-live="polite"></div>
+    
+    <div class="cook-mode__container">
+      <div class="cook-mode__sidebar" id="cook-mode-sidebar">
+        <h3>Ingredients</h3>
+        <ul class="ingredient-list">
+          <% ingredientsView.forEach(function(ing, i) { %>
+            <li class="ingredient">
+              <label>
+                <input type="checkbox" />
+                <span class="ingredient-text">
+                  <% if (ing.convertible) { %><span class="js-amount" data-amount="<%= ing.amount %>" data-unit="<%= ing.unit %>"><%= ing.displayAmount %> <%= ing.unit %></span><% } else if (ing.amount !== null) { %><span class="ingredient-amount-static"><%= ing.displayAmount %><%= ing.unit ? ' ' + ing.unit : '' %></span><% } %>
+                  <%= ing.name %>
+                </span>
+              </label>
+            </li>
+          <% }); %>
+        </ul>
+      </div>
+      
+      <div class="cook-mode__main">
+        <div class="cook-mode__body">
+          <span class="cook-mode__step-count" id="cook-mode-step-count"></span>
+          <div class="cook-mode__step-text" id="cook-mode-step-text" aria-live="polite"></div>
+        </div>
+      </div>
     </div>
+    
     <div class="cook-mode__nav">
       <button type="button" class="btn btn-ghost" id="cook-mode-prev">&larr; Back</button>
       <button type="button" class="btn btn-primary" id="cook-mode-next">Next &rarr;</button>
@@ -117,6 +148,7 @@
   </div>
 </article>
 
+<script src="/js/recipe-helpers.js"></script>
 <script src="/js/cook-mode.js"></script>
 
 <%- include('partials/footer') %>

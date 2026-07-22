@@ -11,10 +11,17 @@
   const stepCountEl = document.getElementById('cook-mode-step-count');
   const stepTextEl = document.getElementById('cook-mode-step-text');
   const progressBar = document.getElementById('cook-mode-progress-bar');
+  
+  // Mobile ingredients drawer toggle
+  const ingToggleBtn = document.getElementById('cook-mode-ing-toggle');
+  const sidebarEl = document.getElementById('cook-mode-sidebar');
 
   // Reuses the already-rendered (and already unit-converted) step markup
   // rather than re-fetching or duplicating conversion logic.
   const steps = Array.from(document.querySelectorAll('.step-list > li')).map((li) => li.innerHTML);
+
+  const mainCheckboxes = document.querySelectorAll('.recipe-body .ingredient input[type="checkbox"]');
+  const cookCheckboxes = document.querySelectorAll('.cook-mode__sidebar .ingredient input[type="checkbox"]');
 
   let current = 0;
   let wakeLock = null;
@@ -43,9 +50,18 @@
     nextBtn.textContent = current === steps.length - 1 ? 'Done \u{1F389}' : 'Next →';
   }
 
+  function syncCheckboxesToCookMode() {
+    mainCheckboxes.forEach((cb, idx) => {
+      if (cookCheckboxes[idx]) {
+        cookCheckboxes[idx].checked = cb.checked;
+      }
+    });
+  }
+
   function open() {
     if (!steps.length) return;
     current = 0;
+    syncCheckboxesToCookMode();
     render();
     cookMode.classList.add('is-open');
     document.body.style.overflow = 'hidden';
@@ -54,6 +70,7 @@
 
   function close() {
     cookMode.classList.remove('is-open');
+    if (sidebarEl) sidebarEl.classList.remove('drawer-open');
     document.body.style.overflow = '';
     releaseWakeLock();
   }
@@ -73,10 +90,36 @@
     render();
   }
 
+  // Setup checkbox sync listeners
+  cookCheckboxes.forEach((cb, idx) => {
+    cb.addEventListener('change', () => {
+      if (mainCheckboxes[idx]) {
+        mainCheckboxes[idx].checked = cb.checked;
+        
+        // Trigger style/re-evaluation in other scripts if needed
+        mainCheckboxes[idx].dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    });
+  });
+
   startBtn.addEventListener('click', open);
   closeBtn.addEventListener('click', close);
   nextBtn.addEventListener('click', next);
   prevBtn.addEventListener('click', prev);
+
+  if (ingToggleBtn && sidebarEl) {
+    ingToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      sidebarEl.classList.toggle('drawer-open');
+    });
+    
+    // Close sidebar drawer if clicked outside of it on mobile
+    cookMode.addEventListener('click', (e) => {
+      if (sidebarEl.classList.contains('drawer-open') && !sidebarEl.contains(e.target) && e.target !== ingToggleBtn) {
+        sidebarEl.classList.remove('drawer-open');
+      }
+    });
+  }
 
   document.addEventListener('keydown', (e) => {
     if (!cookMode.classList.contains('is-open')) return;
