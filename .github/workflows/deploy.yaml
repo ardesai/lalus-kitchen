@@ -1,0 +1,41 @@
+name: Deploy to MacBook Server
+
+on:
+  push:
+    branches:
+      - main  # Change to 'master' if that is your primary branch name
+
+jobs:
+  deploy:
+    name: Tailscale Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Pull repository code into the GitHub Actions runner
+      - name: Checkout Repository Code
+        uses: actions/checkout@v4
+
+      # Step 2: Connect the Cloud Runner to your private Tailnet
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v3
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+
+      # Step 3: SSH into your MacBook, pull fresh code, and restart
+      - name: Execute Remote Deployment over SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # Navigate to your project directory on the MacBook
+            cd /home/abhi/apps/kitchen-app  # <--- Update this path to your app directory
+
+            # Pull latest changes and rebuild
+            git pull origin main
+            npm install
+            npm run build
+
+            # Restart your app runner (adjust command if using pm2, Docker, or systemd)
+            pm2 restart kitchen-app
