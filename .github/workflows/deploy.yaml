@@ -30,12 +30,12 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             # Navigate to your project directory on the MacBook
-            cd /home/abhi/apps/kitchen-app  # <--- Update this path to your app directory
+            cd /home/abhi/.openclaw/workspace/lalus-kitchen
 
             # Pull latest changes and rebuild
             git pull origin main
             npm install
             npm run build
 
-            # Restart your app runner (adjust command if using pm2, Docker, or systemd)
-            pm2 restart kitchen-app
+            # Restart your app runner
+            systemctl --user restart lalus-kitchen.service
