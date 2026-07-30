@@ -2,11 +2,12 @@
   "slug": "cottage-cheese-peanut-butter-brownie-cheesecake",
   "title": "Cottage Cheese + Peanut Butter Brownie Cheesecake",
   "description": "A protein-packed dessert that sits between a fudgy brownie and a creamy cheesecake - no flour needed.",
-  "image_path": null,
+  "image_path": "/uploads/cottage-cheesecake.jpg",
   "prep_minutes": 15,
   "cook_minutes": 210,
   "servings": 8,
   "difficulty": "Easy",
+  "published": true,
   "ingredients": [
     {
       "amount": 300,

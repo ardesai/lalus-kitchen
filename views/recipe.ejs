@@ -5,6 +5,12 @@
     <a href="/" class="recipe-breadcrumb__link">&larr; All recipes</a>
   </div>
 
+  <% if (recipe.published === false) { %>
+    <div class="container">
+      <div class="draft-banner">🔒 Hidden - only visible to you while logged in as admin.</div>
+    </div>
+  <% } %>
+
   <div class="recipe-hero">
     <div class="recipe-hero__image" style="background-image: url('<%= recipe.image_path %>'); background-size: cover; background-position: center;" role="img" aria-label="<%= recipe.title %>"></div>
     <div class="recipe-hero__overlay">

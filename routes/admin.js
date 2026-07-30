@@ -33,6 +33,7 @@ function formValuesFromBody(body) {
     cookMinutes: body.cookMinutes || '',
     servings: body.servings || '',
     difficulty: body.difficulty || '',
+    published: body.published === 'on',
   };
 }
 
@@ -95,7 +96,7 @@ router.get('/recipes/new', requireAuth, (req, res) => {
     recipe: null,
     values: {
       title: '', description: '', ingredientsText: '', stepsText: '', tipsText: '',
-      prepMinutes: '', cookMinutes: '', servings: '', difficulty: '',
+      prepMinutes: '', cookMinutes: '', servings: '', difficulty: '', published: true,
     },
     errors: [],
   });
@@ -135,6 +136,7 @@ router.post('/recipes', requireAuth, handleUpload, (req, res) => {
     cookMinutes: parseOptionalInt(req.body.cookMinutes),
     servings: parseOptionalInt(req.body.servings),
     difficulty: parseDifficulty(req.body.difficulty),
+    published: req.body.published === 'on',
   });
 
   res.redirect(`/recipes/${recipe.slug}`);
@@ -158,6 +160,7 @@ router.get('/recipes/:slug/edit', requireAuth, (req, res) => {
     cookMinutes: recipe.cook_minutes != null ? String(recipe.cook_minutes) : '',
     servings: recipe.servings != null ? String(recipe.servings) : '',
     difficulty: recipe.difficulty || '',
+    published: recipe.published !== false,
   };
 
   res.render('admin/form', {
@@ -208,6 +211,7 @@ router.post('/recipes/:slug', requireAuth, handleUpload, (req, res) => {
     cookMinutes: parseOptionalInt(req.body.cookMinutes),
     servings: parseOptionalInt(req.body.servings),
     difficulty: parseDifficulty(req.body.difficulty),
+    published: req.body.published === 'on',
   });
 
   if (req.file && oldImagePath) {
@@ -216,6 +220,17 @@ router.post('/recipes/:slug', requireAuth, handleUpload, (req, res) => {
   }
 
   res.redirect(`/recipes/${updated.slug}`);
+});
+
+// --- Visibility ---
+
+router.post('/recipes/:slug/toggle-visibility', requireAuth, (req, res) => {
+  const recipe = Recipe.findBySlug(req.params.slug);
+  if (!recipe) return res.status(404).render('404', { siteName: "Lalu's Kitchen" });
+
+  const isPublished = recipe.published !== false;
+  Recipe.setPublished(req.params.slug, !isPublished);
+  res.redirect('/admin');
 });
 
 // --- Delete ---

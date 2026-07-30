@@ -27,6 +27,11 @@
       <textarea name="description" rows="3" required><%= values.description %></textarea>
     </label>
 
+    <label class="checkbox-label">
+      <input type="checkbox" name="published" <%= values.published ? 'checked' : '' %> />
+      Published (visible on the public site)
+    </label>
+
     <div class="form-row">
       <label>
         Prep Time (minutes)

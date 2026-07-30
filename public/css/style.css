@@ -897,6 +897,27 @@ img { max-width: 100%; display: block; }
   gap: 18px;
 }
 
+.stacked-form label.checkbox-label {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary);
+}
+
+.draft-banner {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 16px 0 0;
+}
+
 .field-hint { font-weight: 400; color: var(--color-text-muted); font-size: 0.82rem; }
 .required-mark { color: var(--color-danger); font-weight: 400; font-size: 0.8rem; }
 
@@ -965,6 +986,16 @@ img { max-width: 100%; display: block; }
   border-radius: 8px;
 }
 .admin-table__actions { display: flex; gap: 8px; }
+
+.status-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+.status-badge--published { background: var(--color-accent-light); color: var(--color-accent); }
+.status-badge--hidden { background: var(--color-border); color: var(--color-text-muted); }
 
 .admin-form-page { padding: 40px 0 80px; }
 

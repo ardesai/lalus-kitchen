@@ -43,7 +43,7 @@ const Recipe = {
     return readRecipeFile(slug);
   },
 
-  create({ title, description, imagePath, ingredients, steps, tips, prepMinutes, cookMinutes, servings, difficulty }) {
+  create({ title, description, imagePath, ingredients, steps, tips, prepMinutes, cookMinutes, servings, difficulty, published }) {
     const slug = uniqueSlug(slugify(title));
     const now = new Date().toISOString();
 
@@ -56,6 +56,7 @@ const Recipe = {
       cook_minutes: cookMinutes || null,
       servings: servings || null,
       difficulty: difficulty || null,
+      published: published !== false,
       ingredients,
       steps,
       tips,
@@ -67,7 +68,7 @@ const Recipe = {
     return recipe;
   },
 
-  update(slug, { title, description, imagePath, ingredients, steps, tips, prepMinutes, cookMinutes, servings, difficulty }) {
+  update(slug, { title, description, imagePath, ingredients, steps, tips, prepMinutes, cookMinutes, servings, difficulty, published }) {
     const existing = readRecipeFile(slug);
     if (!existing) return null;
 
@@ -84,6 +85,7 @@ const Recipe = {
       cook_minutes: cookMinutes || null,
       servings: servings || null,
       difficulty: difficulty || null,
+      published: published !== false,
       ingredients,
       steps,
       tips,
@@ -93,6 +95,15 @@ const Recipe = {
     writeRecipeFile(updated);
     if (newSlug !== slug) fs.unlinkSync(filePath(slug));
 
+    return updated;
+  },
+
+  setPublished(slug, published) {
+    const existing = readRecipeFile(slug);
+    if (!existing) return null;
+
+    const updated = { ...existing, published: !!published, updated_at: new Date().toISOString() };
+    writeRecipeFile(updated);
     return updated;
   },
 
