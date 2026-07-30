@@ -1,0 +1,81 @@
+{
+  "slug": "cottage-cheese-peanut-butter-brownie-cheesecake",
+  "title": "Cottage Cheese + Peanut Butter Brownie Cheesecake",
+  "description": "A protein-packed dessert that sits between a fudgy brownie and a creamy cheesecake - no flour needed.",
+  "image_path": null,
+  "prep_minutes": 15,
+  "cook_minutes": 210,
+  "servings": 8,
+  "difficulty": "Easy",
+  "ingredients": [
+    {
+      "amount": 300,
+      "unit": "g",
+      "name": "low-protein cottage cheese"
+    },
+    {
+      "amount": 2,
+      "unit": null,
+      "name": "medium ripe bananas (about 220g peeled)"
+    },
+    {
+      "amount": 2,
+      "unit": null,
+      "name": "large eggs"
+    },
+    {
+      "amount": 75,
+      "unit": "g",
+      "name": "peanut butter"
+    },
+    {
+      "amount": 30,
+      "unit": "g",
+      "name": "unsweetened cocoa powder"
+    },
+    {
+      "amount": 30,
+      "unit": "g",
+      "name": "protein powder (optional)"
+    },
+    {
+      "amount": 15,
+      "unit": "g",
+      "name": "honey (optional)"
+    },
+    {
+      "amount": 1,
+      "unit": "tsp",
+      "name": "vanilla extract"
+    },
+    {
+      "amount": 1,
+      "unit": "tsp",
+      "name": "baking powder"
+    },
+    {
+      "amount": 0.25,
+      "unit": "tsp",
+      "name": "salt"
+    }
+  ],
+  "steps": [
+    "Preheat oven to 170°C fan (180°C conventional).",
+    "Blend the cottage cheese, bananas, eggs, peanut butter, vanilla, and honey until completely smooth.",
+    "Add the cocoa powder, protein powder, baking powder, and salt. Blend briefly until just combined.",
+    "Pour into a lined 18-20cm (7-8 inch) cake tin.",
+    "Swirl an extra 10-15g of peanut butter over the top for more peanut-butter flavour.",
+    "Bake for 30-40 minutes. The centre should still have a slight wobble when it comes out - it firms up as it chills.",
+    "Let it cool completely, then refrigerate for at least 2-3 hours, ideally overnight."
+  ],
+  "tips": [
+    "No flour needed - the banana, eggs, and cottage cheese give it enough structure, while the cocoa gives it brownie character.",
+    "Use very ripe bananas - they add sweetness and moisture.",
+    "Don't overbake. A slightly underdone centre becomes beautifully fudgy after chilling.",
+    "Protein powder is genuinely optional: skip it for a softer, more cheesecake-like texture, or keep it for a firmer, more protein-heavy bake.",
+    "If your cottage cheese is particularly watery, drain it for 15-30 minutes first.",
+    "For a lighter, less intense chocolate-peanut flavour, dial back to 60g peanut butter and 25g cocoa instead."
+  ],
+  "created_at": "2026-07-30T13:55:05.000Z",
+  "updated_at": "2026-07-30T13:55:05.000Z"
+}
