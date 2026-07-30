@@ -36,14 +36,16 @@
               </span>
             </td>
             <td><%= recipe.created_at.slice(0, 10) %></td>
-            <td class="admin-table__actions">
-              <form method="POST" action="/admin/recipes/<%= recipe.slug %>/toggle-visibility">
-                <button type="submit" class="btn btn-small btn-ghost"><%= isPublished ? 'Hide' : 'Show' %></button>
-              </form>
-              <a class="btn btn-small" href="/admin/recipes/<%= recipe.slug %>/edit">Edit</a>
-              <form method="POST" action="/admin/recipes/<%= recipe.slug %>/delete" onsubmit="return confirm('Delete this recipe? This cannot be undone.');">
-                <button type="submit" class="btn btn-small btn-danger">Delete</button>
-              </form>
+            <td>
+              <div class="admin-table__actions">
+                <form method="POST" action="/admin/recipes/<%= recipe.slug %>/toggle-visibility">
+                  <button type="submit" class="btn btn-small btn-ghost"><%= isPublished ? 'Hide' : 'Show' %></button>
+                </form>
+                <a class="btn btn-small" href="/admin/recipes/<%= recipe.slug %>/edit">Edit</a>
+                <form method="POST" action="/admin/recipes/<%= recipe.slug %>/delete" onsubmit="return confirm('Delete this recipe? This cannot be undone.');">
+                  <button type="submit" class="btn btn-small btn-danger">Delete</button>
+                </form>
+              </div>
             </td>
           </tr>
         <% }); %>
