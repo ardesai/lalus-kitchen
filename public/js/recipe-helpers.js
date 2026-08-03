@@ -103,8 +103,15 @@
     const baseServings = parseInt(servingsValueEl.dataset.baseServings) || 4;
     let currentServings = parseInt(servingsValueEl.textContent) || baseServings;
 
-    // Cache original base amounts
-    document.querySelectorAll('.js-amount').forEach(el => {
+    function formatScaledAmount(n) {
+      const rounded = Math.round(n * 100) / 100;
+      return Number.isInteger(rounded) ? String(rounded) : String(parseFloat(rounded.toFixed(2)));
+    }
+
+    // Cache original base amounts - both unit-convertible amounts (g/ml/etc,
+    // re-rendered via the metric/imperial toggle) and static ones (tsp/tbsp,
+    // counts like "2 eggs", which just need their number rescaled in place).
+    document.querySelectorAll('.js-amount, .ingredient-amount-static').forEach(el => {
       if (!el.dataset.baseAmount) {
         el.dataset.baseAmount = el.dataset.amount;
       }
@@ -124,7 +131,15 @@
         el.dataset.amount = scaledAmount; // Update data attribute so unit conversion picks it up
       });
 
-      // Trigger unit toggle update to re-render in the active system
+      document.querySelectorAll('.ingredient-amount-static').forEach(el => {
+        const baseVal = parseFloat(el.dataset.baseAmount);
+        if (isNaN(baseVal)) return;
+
+        const unit = el.dataset.unit || '';
+        el.textContent = `${formatScaledAmount(baseVal * ratio)}${unit ? ' ' + unit : ''}`;
+      });
+
+      // Trigger unit toggle update to re-render .js-amount in the active system
       const activeUnitOption = document.querySelector('.unit-toggle__option.is-active');
       if (activeUnitOption) {
         activeUnitOption.click();

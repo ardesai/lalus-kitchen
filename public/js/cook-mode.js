@@ -16,9 +16,14 @@
   const ingToggleBtn = document.getElementById('cook-mode-ing-toggle');
   const sidebarEl = document.getElementById('cook-mode-sidebar');
 
-  // Reuses the already-rendered (and already unit-converted) step markup
-  // rather than re-fetching or duplicating conversion logic.
-  const steps = Array.from(document.querySelectorAll('.step-list > li')).map((li) => li.innerHTML);
+  // Reuses the already-rendered (and already unit-converted/timer-ified) step
+  // markup rather than re-fetching or duplicating that logic. Captured fresh
+  // on each open (not once at parse time) since other scripts - like the
+  // inline step-timer buttons - modify .step-list's innerHTML after load.
+  let steps = [];
+  function captureSteps() {
+    return Array.from(document.querySelectorAll('.step-list > li')).map((li) => li.innerHTML);
+  }
 
   const mainCheckboxes = document.querySelectorAll('.recipe-body .ingredient input[type="checkbox"]');
   const cookCheckboxes = document.querySelectorAll('.cook-mode__sidebar .ingredient input[type="checkbox"]');
@@ -59,6 +64,7 @@
   }
 
   function open() {
+    steps = captureSteps();
     if (!steps.length) return;
     current = 0;
     syncCheckboxesToCookMode();

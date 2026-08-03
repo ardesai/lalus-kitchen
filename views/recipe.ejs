@@ -80,7 +80,7 @@
             <label>
               <input type="checkbox" />
               <span class="ingredient-text">
-                <% if (ing.convertible) { %><span class="js-amount" data-amount="<%= ing.amount %>" data-unit="<%= ing.unit %>"><%= ing.displayAmount %> <%= ing.unit %></span><% } else if (ing.amount !== null) { %><span class="ingredient-amount-static"><%= ing.displayAmount %><%= ing.unit ? ' ' + ing.unit : '' %></span><% } %>
+                <% if (ing.convertible) { %><span class="js-amount" data-amount="<%= ing.amount %>" data-unit="<%= ing.unit %>"><%= ing.displayAmount %> <%= ing.unit %></span><% } else if (ing.amount !== null) { %><span class="ingredient-amount-static" data-amount="<%= ing.amount %>" data-unit="<%= ing.unit || '' %>"><%= ing.displayAmount %><%= ing.unit ? ' ' + ing.unit : '' %></span><% } %>
                 <%= ing.name %>
               </span>
             </label>
@@ -130,7 +130,7 @@
               <label>
                 <input type="checkbox" />
                 <span class="ingredient-text">
-                  <% if (ing.convertible) { %><span class="js-amount" data-amount="<%= ing.amount %>" data-unit="<%= ing.unit %>"><%= ing.displayAmount %> <%= ing.unit %></span><% } else if (ing.amount !== null) { %><span class="ingredient-amount-static"><%= ing.displayAmount %><%= ing.unit ? ' ' + ing.unit : '' %></span><% } %>
+                  <% if (ing.convertible) { %><span class="js-amount" data-amount="<%= ing.amount %>" data-unit="<%= ing.unit %>"><%= ing.displayAmount %> <%= ing.unit %></span><% } else if (ing.amount !== null) { %><span class="ingredient-amount-static" data-amount="<%= ing.amount %>" data-unit="<%= ing.unit || '' %>"><%= ing.displayAmount %><%= ing.unit ? ' ' + ing.unit : '' %></span><% } %>
                   <%= ing.name %>
                 </span>
               </label>

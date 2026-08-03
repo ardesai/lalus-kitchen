@@ -22,23 +22,6 @@
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-[data-theme="dark"] {
-  --color-bg: #161211;           /* Deep espresso */
-  --color-surface: #221c1a;      /* Rich dark chocolate */
-  --color-text: #f5ebe0;         /* Warm cream text */
-  --color-text-muted: #a39387;   /* Muted beige */
-  --color-primary: #e07a5f;      /* Lighter warm terracotta */
-  --color-primary-light: #3d2d29;/* Dark terracotta tint */
-  --color-primary-dark: #f2a38f;
-  --color-accent: #52b788;       /* Sage/mint accent */
-  --color-accent-light: #1d3a2f;
-  --color-border: #3a302d;       /* Dark cocoa divider */
-  --color-glass: rgba(22, 18, 17, 0.75);
-
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.3);
-  --shadow-card-hover: 0 12px 32px rgba(0, 0, 0, 0.5);
-}
-
 * { box-sizing: border-box; }
 
 html, body {
@@ -152,45 +135,6 @@ img { max-width: 100%; display: block; }
 }
 .site-nav > a:hover {
   color: var(--color-primary);
-}
-
-.theme-toggle-btn {
-  border: none;
-  background: transparent;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-text);
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  padding: 0;
-}
-.theme-toggle-btn:hover {
-  background-color: var(--color-primary-light);
-  transform: scale(1.05);
-}
-.theme-toggle-btn svg {
-  width: 20px;
-  height: 20px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: transform 0.3s ease;
-}
-.theme-toggle-btn:hover svg {
-  transform: rotate(15deg);
-}
-.theme-toggle-btn .sun-icon { display: none; }
-.theme-toggle-btn .moon-icon { display: block; }
-[data-theme="dark"] .theme-toggle-btn .sun-icon { display: block; }
-[data-theme="dark"] .theme-toggle-btn .moon-icon { display: none; }
-[data-theme="dark"] .theme-toggle-btn:hover {
-  background-color: #2b2320;
 }
 
 /* ---------- Unit toggle ---------- */
@@ -546,9 +490,6 @@ img { max-width: 100%; display: block; }
 .ingredient label:hover {
   background-color: var(--color-primary-light);
 }
-[data-theme="dark"] .ingredient label:hover {
-  background-color: #2b2320;
-}
 
 .ingredient input[type="checkbox"] {
   margin-top: 4px;
@@ -704,9 +645,6 @@ img { max-width: 100%; display: block; }
 .servings-scaler__btn:hover {
   background-color: var(--color-primary-light);
 }
-[data-theme="dark"] .servings-scaler__btn:hover {
-  background-color: #2b2320;
-}
 .servings-scaler__value {
   font-weight: 700;
   font-size: 0.95rem;
@@ -732,13 +670,6 @@ img { max-width: 100%; display: block; }
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 .inline-timer-btn:hover {
-  background-color: var(--color-primary);
-  color: #fff;
-}
-[data-theme="dark"] .inline-timer-btn {
-  background-color: #3d2d29;
-}
-[data-theme="dark"] .inline-timer-btn:hover {
   background-color: var(--color-primary);
   color: #fff;
 }
