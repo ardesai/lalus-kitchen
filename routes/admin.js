@@ -9,6 +9,7 @@ const { requireAuth } = require('../middleware/auth');
 const {
   parseIngredientsText,
   parseLinesText,
+  ALLOWED_TAGS,
 } = require('../utils/recipe');
 
 const router = express.Router();
@@ -34,6 +35,11 @@ function formValuesFromBody(body) {
     servings: body.servings || '',
     difficulty: body.difficulty || '',
     published: body.published === 'on',
+    calories: body.calories || '',
+    proteinG: body.proteinG || '',
+    carbsG: body.carbsG || '',
+    fatG: body.fatG || '',
+    tags: parseTags(body.tags),
   };
 }
 
@@ -45,8 +51,20 @@ function parseOptionalInt(value) {
   return Number.isFinite(n) && n >= 0 ? n : null;
 }
 
+function parseOptionalNumber(value) {
+  if (value === undefined || value === null || String(value).trim() === '') return null;
+  const n = parseFloat(value);
+  return Number.isFinite(n) && n >= 0 ? n : null;
+}
+
 function parseDifficulty(value) {
   return ALLOWED_DIFFICULTIES.has(value) ? value : null;
+}
+
+function parseTags(value) {
+  if (!value) return [];
+  const arr = Array.isArray(value) ? value : [value];
+  return ALLOWED_TAGS.filter((t) => arr.includes(t));
 }
 
 // --- Auth ---
@@ -94,9 +112,11 @@ router.get('/recipes/new', requireAuth, (req, res) => {
     siteName: "Lalu's Kitchen",
     mode: 'new',
     recipe: null,
+    allowedTags: ALLOWED_TAGS,
     values: {
       title: '', description: '', ingredientsText: '', stepsText: '', tipsText: '',
       prepMinutes: '', cookMinutes: '', servings: '', difficulty: '', published: true,
+      calories: '', proteinG: '', carbsG: '', fatG: '', tags: [],
     },
     errors: [],
   });
@@ -120,6 +140,7 @@ router.post('/recipes', requireAuth, handleUpload, (req, res) => {
       siteName: "Lalu's Kitchen",
       mode: 'new',
       recipe: null,
+      allowedTags: ALLOWED_TAGS,
       values,
       errors,
     });
@@ -137,6 +158,11 @@ router.post('/recipes', requireAuth, handleUpload, (req, res) => {
     servings: parseOptionalInt(req.body.servings),
     difficulty: parseDifficulty(req.body.difficulty),
     published: req.body.published === 'on',
+    calories: parseOptionalInt(req.body.calories),
+    proteinG: parseOptionalNumber(req.body.proteinG),
+    carbsG: parseOptionalNumber(req.body.carbsG),
+    fatG: parseOptionalNumber(req.body.fatG),
+    tags: parseTags(req.body.tags),
   });
 
   res.redirect(`/recipes/${recipe.slug}`);
@@ -161,12 +187,18 @@ router.get('/recipes/:slug/edit', requireAuth, (req, res) => {
     servings: recipe.servings != null ? String(recipe.servings) : '',
     difficulty: recipe.difficulty || '',
     published: recipe.published !== false,
+    calories: recipe.calories != null ? String(recipe.calories) : '',
+    proteinG: recipe.protein_g != null ? String(recipe.protein_g) : '',
+    carbsG: recipe.carbs_g != null ? String(recipe.carbs_g) : '',
+    fatG: recipe.fat_g != null ? String(recipe.fat_g) : '',
+    tags: recipe.tags || [],
   };
 
   res.render('admin/form', {
     siteName: "Lalu's Kitchen",
     mode: 'edit',
     recipe,
+    allowedTags: ALLOWED_TAGS,
     values,
     errors: [],
   });
@@ -193,6 +225,7 @@ router.post('/recipes/:slug', requireAuth, handleUpload, (req, res) => {
       siteName: "Lalu's Kitchen",
       mode: 'edit',
       recipe,
+      allowedTags: ALLOWED_TAGS,
       values,
       errors,
     });
@@ -212,6 +245,11 @@ router.post('/recipes/:slug', requireAuth, handleUpload, (req, res) => {
     servings: parseOptionalInt(req.body.servings),
     difficulty: parseDifficulty(req.body.difficulty),
     published: req.body.published === 'on',
+    calories: parseOptionalInt(req.body.calories),
+    proteinG: parseOptionalNumber(req.body.proteinG),
+    carbsG: parseOptionalNumber(req.body.carbsG),
+    fatG: parseOptionalNumber(req.body.fatG),
+    tags: parseTags(req.body.tags),
   });
 
   if (req.file && oldImagePath) {

@@ -1,6 +1,6 @@
 const express = require('express');
 const Recipe = require('../models/recipe');
-const { escapeHtml, markupTemperatures, isConvertibleUnit, formatAmount, recipeMeta } = require('../utils/recipe');
+const { escapeHtml, markupTemperatures, isConvertibleUnit, formatAmount, recipeMeta, ALLOWED_TAGS } = require('../utils/recipe');
 
 const router = express.Router();
 
@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   const recipes = Recipe.all()
     .filter((recipe) => recipe.published !== false)
     .map((recipe) => ({ ...recipe, meta: recipeMeta(recipe) }));
-  res.render('index', { recipes, siteName: "Lalu's Kitchen" });
+  res.render('index', { recipes, allowedTags: ALLOWED_TAGS, siteName: "Lalu's Kitchen" });
 });
 
 router.get('/recipes/:slug', (req, res) => {

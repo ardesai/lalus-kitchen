@@ -56,6 +56,37 @@
       </label>
     </div>
 
+    <div class="form-row">
+      <label>
+        Calories <span class="field-hint">(per serving)</span>
+        <input type="number" name="calories" min="0" value="<%= values.calories %>" />
+      </label>
+      <label>
+        Protein (g)
+        <input type="number" name="proteinG" min="0" step="0.1" value="<%= values.proteinG %>" />
+      </label>
+      <label>
+        Carbs (g)
+        <input type="number" name="carbsG" min="0" step="0.1" value="<%= values.carbsG %>" />
+      </label>
+      <label>
+        Fat (g)
+        <input type="number" name="fatG" min="0" step="0.1" value="<%= values.fatG %>" />
+      </label>
+    </div>
+
+    <fieldset class="form-fieldset">
+      <legend>Dietary Tags</legend>
+      <div class="checkbox-group">
+        <% allowedTags.forEach(function(tag) { %>
+          <label class="checkbox-label checkbox-label--inline">
+            <input type="checkbox" name="tags" value="<%= tag %>" <%= values.tags.includes(tag) ? 'checked' : '' %> />
+            <%= tag %>
+          </label>
+        <% }); %>
+      </div>
+    </fieldset>
+
     <label>
       Hero Photo <% if (mode === 'new') { %><span class="required-mark">(required)</span><% } %>
       <input type="file" name="image" accept="image/png,image/jpeg,image/webp,image/gif" <%= mode === 'new' ? 'required' : '' %> />

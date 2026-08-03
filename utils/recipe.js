@@ -111,8 +111,8 @@ function formatDuration(minutes) {
   return `${hrs} hr ${mins} min`;
 }
 
-// Derives the display-ready prep/cook/total/servings/difficulty for a recipe.
-// Fields are all optional, so each may come back null.
+// Derives the display-ready prep/cook/total/servings/difficulty/nutrition
+// for a recipe. Fields are all optional, so each may come back null.
 function recipeMeta(recipe) {
   const prepMinutes = Number(recipe.prep_minutes) || 0;
   const cookMinutes = Number(recipe.cook_minutes) || 0;
@@ -122,8 +122,25 @@ function recipeMeta(recipe) {
     total: formatDuration(prepMinutes + cookMinutes),
     servings: recipe.servings || null,
     difficulty: recipe.difficulty || null,
+    calories: recipe.calories || null,
+    protein: recipe.protein_g || null,
+    carbs: recipe.carbs_g || null,
+    fat: recipe.fat_g || null,
   };
 }
+
+// Curated set of dietary tags, so filtering/data stays consistent instead of
+// relying on free-text (which would drift - "Veg" vs "Vegetarian" etc.)
+const ALLOWED_TAGS = [
+  'Vegetarian',
+  'Vegan',
+  'Gluten-Free',
+  'Dairy-Free',
+  'High-Protein',
+  'Low-Carb',
+  'Keto',
+  'Nut-Free',
+];
 
 module.exports = {
   slugify,
@@ -136,4 +153,5 @@ module.exports = {
   markupTemperatures,
   formatDuration,
   recipeMeta,
+  ALLOWED_TAGS,
 };

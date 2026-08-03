@@ -12,6 +12,7 @@
     let searchVal = '';
     let difficultyVal = 'all';
     let timeVal = 'all';
+    const activeTags = new Set();
 
     function applyFilters() {
       recipeCards.forEach(card => {
@@ -20,11 +21,12 @@
         const ingredients = card.dataset.ingredients || '';
         const difficulty = card.dataset.difficulty || '';
         const minutes = parseInt(card.dataset.minutes) || 0;
+        const cardTags = (card.dataset.tags || '').split('|').filter(Boolean);
 
         // Keyword Match
-        const matchesSearch = !searchVal || 
-          title.includes(searchVal) || 
-          desc.includes(searchVal) || 
+        const matchesSearch = !searchVal ||
+          title.includes(searchVal) ||
+          desc.includes(searchVal) ||
           ingredients.includes(searchVal);
 
         // Difficulty Match
@@ -42,7 +44,11 @@
           matchesTime = minutes > 60;
         }
 
-        const visible = matchesSearch && matchesDifficulty && matchesTime;
+        // Dietary Tags Match (recipe must have ALL selected tags)
+        const matchesTags = activeTags.size === 0 ||
+          Array.from(activeTags).every(tag => cardTags.includes(tag));
+
+        const visible = matchesSearch && matchesDifficulty && matchesTime && matchesTags;
         card.classList.toggle('is-hidden', !visible);
       });
 
@@ -86,6 +92,22 @@
         document.querySelectorAll('#time-filters .filter-tag').forEach(t => t.classList.remove('is-active'));
         tag.classList.add('is-active');
         timeVal = tag.dataset.value;
+        applyFilters();
+      });
+    });
+
+    // Dietary filters are multi-select (toggle independently, no "All" button) -
+    // a recipe must match every currently active tag.
+    document.querySelectorAll('#dietary-filters .filter-tag').forEach(tag => {
+      tag.addEventListener('click', () => {
+        const value = tag.dataset.value;
+        if (activeTags.has(value)) {
+          activeTags.delete(value);
+          tag.classList.remove('is-active');
+        } else {
+          activeTags.add(value);
+          tag.classList.add('is-active');
+        }
         applyFilters();
       });
     });

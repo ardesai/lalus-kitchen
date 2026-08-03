@@ -19,20 +19,33 @@
         <input type="text" id="recipe-search" class="search-input" placeholder="Search recipes by name, description, or ingredients..." />
       </div>
       <div class="filters-group">
-        <span class="filter-label">Difficulty:</span>
-        <div class="filter-tags" id="difficulty-filters">
-          <button type="button" class="filter-tag is-active" data-value="all">All</button>
-          <button type="button" class="filter-tag" data-value="Easy">Easy</button>
-          <button type="button" class="filter-tag" data-value="Medium">Medium</button>
-          <button type="button" class="filter-tag" data-value="Hard">Hard</button>
+        <div class="filter-group-item">
+          <span class="filter-label">Difficulty:</span>
+          <div class="filter-tags" id="difficulty-filters">
+            <button type="button" class="filter-tag is-active" data-value="all">All</button>
+            <button type="button" class="filter-tag" data-value="Easy">Easy</button>
+            <button type="button" class="filter-tag" data-value="Medium">Medium</button>
+            <button type="button" class="filter-tag" data-value="Hard">Hard</button>
+          </div>
         </div>
-        
-        <span class="filter-label">Time:</span>
-        <div class="filter-tags" id="time-filters">
-          <button type="button" class="filter-tag is-active" data-value="all">All</button>
-          <button type="button" class="filter-tag" data-value="quick">Quick (&lt; 30m)</button>
-          <button type="button" class="filter-tag" data-value="medium">Medium (&lt; 1h)</button>
-          <button type="button" class="filter-tag" data-value="slow">Slow (1h+)</button>
+
+        <div class="filter-group-item">
+          <span class="filter-label">Time:</span>
+          <div class="filter-tags" id="time-filters">
+            <button type="button" class="filter-tag is-active" data-value="all">All</button>
+            <button type="button" class="filter-tag" data-value="quick">Quick (&lt; 30m)</button>
+            <button type="button" class="filter-tag" data-value="medium">Medium (&lt; 1h)</button>
+            <button type="button" class="filter-tag" data-value="slow">Slow (1h+)</button>
+          </div>
+        </div>
+
+        <div class="filter-group-item">
+          <span class="filter-label">Dietary:</span>
+          <div class="filter-tags" id="dietary-filters">
+            <% allowedTags.forEach(function(tag) { %>
+              <button type="button" class="filter-tag" data-value="<%= tag %>"><%= tag %></button>
+            <% }); %>
+          </div>
         </div>
       </div>
     </div>
@@ -48,14 +61,21 @@
            data-description="<%= recipe.description.toLowerCase() %>"
            data-difficulty="<%= recipe.difficulty || '' %>"
            data-ingredients="<%= ingredientNames %>"
-           data-minutes="<%= totalMinutes %>">
+           data-minutes="<%= totalMinutes %>"
+           data-tags="<%= (recipe.tags || []).join('|') %>">
           <div class="recipe-card__image" style="background-image: url('<%= recipe.image_path %>')"></div>
           <div class="recipe-card__body">
             <h2><%= recipe.title %></h2>
-            <% if (recipe.meta.total || recipe.meta.difficulty) { %>
+            <% if (recipe.meta.total || recipe.meta.difficulty || recipe.meta.calories) { %>
               <div class="recipe-card__meta">
                 <% if (recipe.meta.total) { %><span class="meta-pill">⏱ <%= recipe.meta.total %></span><% } %>
                 <% if (recipe.meta.difficulty) { %><span class="meta-pill">🍳 <%= recipe.meta.difficulty %></span><% } %>
+                <% if (recipe.meta.calories) { %><span class="meta-pill">🔥 <%= recipe.meta.calories %> cal</span><% } %>
+              </div>
+            <% } %>
+            <% if (recipe.tags && recipe.tags.length) { %>
+              <div class="recipe-card__tags">
+                <% recipe.tags.forEach(function(tag) { %><span class="meta-pill meta-pill--tag"><%= tag %></span><% }); %>
               </div>
             <% } %>
             <p><%= recipe.description %></p>

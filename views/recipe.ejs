@@ -17,6 +17,11 @@
       <div class="container">
         <h1><%= recipe.title %></h1>
         <p class="recipe-hero__description"><%= recipe.description %></p>
+        <% if (recipe.tags && recipe.tags.length) { %>
+          <div class="recipe-tags">
+            <% recipe.tags.forEach(function(tag) { %><span class="tag-pill"><%= tag %></span><% }); %>
+          </div>
+        <% } %>
       </div>
     </div>
   </div>
@@ -61,6 +66,36 @@
           </div>
         <% } %>
       </div>
+    <% } %>
+
+    <% if (meta.calories || meta.protein || meta.carbs || meta.fat) { %>
+      <div class="recipe-meta-bar recipe-meta-bar--nutrition">
+        <% if (meta.calories) { %>
+          <div class="recipe-meta-bar__item">
+            <span class="recipe-meta-bar__label">Calories</span>
+            <span class="recipe-meta-bar__value"><%= meta.calories %></span>
+          </div>
+        <% } %>
+        <% if (meta.protein) { %>
+          <div class="recipe-meta-bar__item">
+            <span class="recipe-meta-bar__label">Protein</span>
+            <span class="recipe-meta-bar__value"><%= meta.protein %>g</span>
+          </div>
+        <% } %>
+        <% if (meta.carbs) { %>
+          <div class="recipe-meta-bar__item">
+            <span class="recipe-meta-bar__label">Carbs</span>
+            <span class="recipe-meta-bar__value"><%= meta.carbs %>g</span>
+          </div>
+        <% } %>
+        <% if (meta.fat) { %>
+          <div class="recipe-meta-bar__item">
+            <span class="recipe-meta-bar__label">Fat</span>
+            <span class="recipe-meta-bar__value"><%= meta.fat %>g</span>
+          </div>
+        <% } %>
+      </div>
+      <p class="nutrition-disclaimer">Nutrition values are per serving and approximate.</p>
     <% } %>
 
     <div class="unit-toggle unit-toggle--recipe" id="recipe-unit-toggle" role="group" aria-label="Unit system">

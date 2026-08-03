@@ -7,6 +7,11 @@
   "cook_minutes": 360,
   "servings": 4,
   "difficulty": "Easy",
+  "calories": 500,
+  "protein_g": 11,
+  "carbs_g": 25,
+  "fat_g": 42,
+  "tags": ["Vegetarian", "Gluten-Free"],
   "ingredients": [
     {
       "amount": 300,
