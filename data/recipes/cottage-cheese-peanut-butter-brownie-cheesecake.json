@@ -11,8 +11,12 @@
   "protein_g": 12,
   "carbs_g": 13,
   "fat_g": 7,
-  "tags": ["Vegetarian", "Gluten-Free", "High-Protein"],
-  "published": false,
+  "tags": [
+    "Vegetarian",
+    "Gluten-Free",
+    "High-Protein"
+  ],
+  "published": true,
   "ingredients": [
     {
       "amount": 300,
@@ -83,5 +87,5 @@
     "For a lighter, less intense chocolate-peanut flavour, dial back to 60g peanut butter and 25g cocoa instead."
   ],
   "created_at": "2026-07-30T13:55:05.000Z",
-  "updated_at": "2026-08-03T12:12:45.870Z"
+  "updated_at": "2026-08-03T12:44:35.241Z"
 }
