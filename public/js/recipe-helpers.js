@@ -52,6 +52,8 @@
         card.classList.toggle('is-hidden', !visible);
       });
 
+      updateFilterCountBadge();
+
       // Show empty state if all cards are hidden
       const visibleCards = document.querySelectorAll('.recipe-card:not(.is-hidden)');
       let emptyState = document.getElementById('filter-empty-state');
@@ -68,6 +70,26 @@
       } else if (emptyState) {
         emptyState.remove();
       }
+    }
+
+    // Mobile-only collapsible filter panel, with a badge counting active
+    // (non-default) filters so it's clear filters are applied while collapsed.
+    const filterToggle = document.getElementById('filter-toggle');
+    const filtersGroup = document.getElementById('filters-group');
+    const filterCountBadge = document.getElementById('filter-active-count');
+
+    function updateFilterCountBadge() {
+      if (!filterCountBadge) return;
+      const count = (difficultyVal !== 'all' ? 1 : 0) + (timeVal !== 'all' ? 1 : 0) + activeTags.size;
+      filterCountBadge.textContent = String(count);
+      filterCountBadge.hidden = count === 0;
+    }
+
+    if (filterToggle && filtersGroup) {
+      filterToggle.addEventListener('click', () => {
+        const expanded = filtersGroup.classList.toggle('is-expanded');
+        filterToggle.setAttribute('aria-expanded', String(expanded));
+      });
     }
 
     if (searchInput) {

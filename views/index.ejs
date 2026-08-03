@@ -18,7 +18,14 @@
         <svg class="search-icon-svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         <input type="text" id="recipe-search" class="search-input" placeholder="Search recipes by name, description, or ingredients..." />
       </div>
-      <div class="filters-group">
+      <button type="button" class="filter-toggle-btn" id="filter-toggle" aria-expanded="false" aria-controls="filters-group">
+        <span class="filter-toggle-btn__label">
+          Filters
+          <span class="filter-toggle-btn__count" id="filter-active-count" hidden></span>
+        </span>
+        <svg class="filter-toggle-btn__chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="filters-group" id="filters-group">
         <div class="filter-group-item">
           <span class="filter-label">Difficulty:</span>
           <div class="filter-tags" id="difficulty-filters">
