@@ -604,7 +604,7 @@ img { max-width: 100%; display: block; }
   pointer-events: none;
 }
 .filter-toggle-btn {
-  display: none; /* shown only on mobile, see media query below */
+  display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
@@ -652,10 +652,12 @@ img { max-width: 100%; display: block; }
 }
 
 .filters-group {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 12px;
+  margin-top: 4px;
 }
+.filters-group.is-expanded { display: flex; }
 .filter-group-item {
   display: flex;
   flex-wrap: wrap;
@@ -1063,13 +1065,6 @@ img { max-width: 100%; display: block; }
   .recipe-section { padding: 20px 18px; }
   .admin-table { font-size: 0.82rem; }
   .admin-table__thumb { width: 44px; height: 44px; }
-
-  .filter-toggle-btn { display: flex; }
-  .filters-group {
-    display: none;
-    margin-top: 4px;
-  }
-  .filters-group.is-expanded { display: flex; }
 
   /* Mobile Cook Mode Drawer */
   .cook-mode__container {
